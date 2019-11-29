@@ -1,0 +1,17 @@
+<div class="card w-50" style="margin-left: 250px; margin-top: 75px; background-color: rgba(25, 19, 85, 0.137)">
+  <div class="card-body">
+    <form [formGroup]="loginForm">
+      <div class="form-group">
+        <label for="userName">UserName</label>
+        <input type="text" class="form-control" placeholder="Enter username" formControlName="username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" placeholder="Enter password" class="form-control" formControlName="password">
+      </div>
+      <button class="btn btn-success" type="submit" (click)="userLogin()">login</button>
+      <button class="btn btn-danger" type="button"(click)="resetForm()" style="margin-left: 5px;">Reset</button>
+      <button class="btn btn-primary btn-sm" type="button" style="float: right;" routerLink="/new-registration">New</button>
+    </form>
+  </div>
+</div>
