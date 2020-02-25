@@ -1,0 +1,122 @@
+<div class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+        <app-navigation></app-navigation>
+        <app-sidebar></app-sidebar>
+
+        <div class="content-wrapper" style="background-color: rgba(0, 128, 128, 0.281)">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2"><br>
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark " style="text-align: center;">User Info</h1>
+                            <!-- Profile Image -->
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile" *ngFor="let user of user_info">
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle"
+                                            src="../../assets/dist/img/avatar04.png" alt="User profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center">{{user.firstName}} {{ user.lastName}} </h3>
+
+                                    <p class="text-muted text-center">{{user.email}} </p>
+
+                                    <button class="btn btn-primary btn-block" data-toggle="modal"
+                                        data-target="#user-info-edit-modal"
+                                        (click)="populateForm()"><b>Edit</b></button>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div> <!-- col-sm-6 -->
+                    </div><!-- row mb-2 -->
+                </div><!-- container-fludi -->
+            </div><!-- content-header -->
+        </div><!-- content-wrapper -->
+    </div> <!-- wrapper-->
+</div>
+
+
+<!-- user info edit modal-->
+<div class="modal fade" id="user-info-edit-modal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: rgba(0, 128, 128, 0.945);">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit User Info</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="user_info_edit_form">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Enter first name" id="firstName"
+                                formControlName="firstName"
+                                [ngClass]="{'is-invalid': submitted && f.firstName.errors }" />
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                            <div *ngIf="submitted && f.firstName.errors">
+                                <div *ngIf="f.firstName.errors.required">
+                                    <span style="color: red;">First name is required</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Enter last name" id="lastName"
+                                formControlName="lastName"
+                                [ngClass]="{'is-invalid' :submitted && f.lastName.errors }" />
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                            <div *ngIf="submitted && f.lastName.errors">
+                                <div *ngIf="f.lastName.errors.required">
+                                    <span style="color: red;">Last name is required</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Enter email" formControlName="email"
+                                [ngClass]="{'is-invalid':submitted && f.email.errors }" />
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                            <div *ngIf="submitted && f.email.errors">
+                                <div *ngIf="f.email.errors.required">
+                                    <span style="color: red;">Email is required</span>
+                                </div>
+                                <div *ngIf="f.email.errors.email">
+                                    <span style="color: red;">Must be valid email</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success " (click)="editUserInfo()"
+                    data-dismiss="modal">Save Changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
